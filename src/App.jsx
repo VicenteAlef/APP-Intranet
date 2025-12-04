@@ -6,9 +6,11 @@ import {
 } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./contexts/AuthContext";
 import { useContext } from "react";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 // Layouts e Páginas
 import Login from "./pages/Login";
+import Users from "./pages/Users";
 import MainLayout from "./layouts/MainLayout";
 
 // Componente PrivateRoute (Mantemos igual)
@@ -38,30 +40,32 @@ const Profile = () => (
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          {/* Rota Pública */}
-          <Route path="/" element={<Login />} />
+    <ThemeProvider>
+      <Router>
+        <AuthProvider>
+          <Routes>
+            {/* Rota Pública */}
+            <Route path="/" element={<Login />} />
 
-          {/* Rotas Protegidas com Layout */}
-          <Route
-            element={
-              <PrivateRoute>
-                <MainLayout />
-              </PrivateRoute>
-            }
-          >
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/users" element={<UsersList />} />
-            <Route path="/profile" element={<Profile />} />
-          </Route>
+            {/* Rotas Protegidas com Layout */}
+            <Route
+              element={
+                <PrivateRoute>
+                  <MainLayout />
+                </PrivateRoute>
+              }
+            >
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/profile" element={<Profile />} />
+            </Route>
 
-          {/* Rota 404 - Redireciona para Dashboard se logado, ou Login se não */}
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </AuthProvider>
-    </Router>
+            {/* Rota 404 - Redireciona para Dashboard se logado, ou Login se não */}
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </AuthProvider>
+      </Router>
+    </ThemeProvider>
   );
 }
 
