@@ -11,6 +11,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 // Layouts e Páginas
 import Login from "./pages/Login";
 import Users from "./pages/Users";
+import Profile from "./pages/Profile";
 import MainLayout from "./layouts/MainLayout";
 
 // Componente PrivateRoute (Mantemos igual)
@@ -34,7 +35,7 @@ const Dashboard = () => (
 const UsersList = () => (
   <h1 className="text-2xl font-bold text-gray-800">👥 Gestão de Usuários</h1>
 );
-const Profile = () => (
+const ProfilTeste = () => (
   <h1 className="text-2xl font-bold text-gray-800">👤 Meu Perfil</h1>
 );
 
