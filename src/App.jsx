@@ -6,54 +6,59 @@ import {
 } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./contexts/AuthContext";
 import { useContext } from "react";
-import Login from "./pages/Login";
 
-// Componente para proteger rotas privadas
+// Layouts e Páginas
+import Login from "./pages/Login";
+import MainLayout from "./layouts/MainLayout";
+
+// Componente PrivateRoute (Mantemos igual)
 const PrivateRoute = ({ children }) => {
   const { authenticated, loading } = useContext(AuthContext);
 
-  if (loading) {
-    return <div className="text-center p-10">Carregando...</div>;
-  }
-
-  if (!authenticated) {
-    return <Navigate to="/" />;
-  }
-
+  if (loading)
+    return (
+      <div className="flex h-screen items-center justify-center">
+        Carregando...
+      </div>
+    );
+  if (!authenticated) return <Navigate to="/" />;
   return children;
 };
 
-// Dashboard temporário só para testar o login
-const DashboardTemp = () => {
-  const { logout, user } = useContext(AuthContext);
-  return (
-    <div className="p-10">
-      <h1 className="text-2xl font-bold">Bem-vindo, {user?.nome}!</h1>
-      <p className="mb-4">Você está logado como: {user?.role}</p>
-      <button
-        onClick={logout}
-        className="bg-red-500 text-white px-4 py-2 rounded"
-      >
-        Sair
-      </button>
-    </div>
-  );
-};
+// Páginas Temporárias (para testar a navegação)
+const Dashboard = () => (
+  <h1 className="text-2xl font-bold text-gray-800">📊 Dashboard Geral</h1>
+);
+const UsersList = () => (
+  <h1 className="text-2xl font-bold text-gray-800">👥 Gestão de Usuários</h1>
+);
+const Profile = () => (
+  <h1 className="text-2xl font-bold text-gray-800">👤 Meu Perfil</h1>
+);
 
 function App() {
   return (
     <Router>
       <AuthProvider>
         <Routes>
+          {/* Rota Pública */}
           <Route path="/" element={<Login />} />
+
+          {/* Rotas Protegidas com Layout */}
           <Route
-            path="/dashboard"
             element={
               <PrivateRoute>
-                <DashboardTemp />
+                <MainLayout />
               </PrivateRoute>
             }
-          />
+          >
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/users" element={<UsersList />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+
+          {/* Rota 404 - Redireciona para Dashboard se logado, ou Login se não */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </AuthProvider>
     </Router>
