@@ -20,7 +20,7 @@ const Login = () => {
     const result = await login(email, password);
 
     if (result.success) {
-      navigate("/dashboard"); // Redireciona para o painel principal
+      navigate("/dashboard");
     } else {
       setError(result.message);
       setIsLoggingIn(false);
@@ -28,8 +28,10 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-xl overflow-hidden">
+    // Fundo da página adaptável
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4 transition-colors duration-200">
+      {/* Card de Login */}
+      <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-transparent dark:border-gray-700 transition-colors duration-200">
         {/* Cabeçalho do Card */}
         <div className="bg-blue-600 p-8 text-center">
           <h1 className="text-3xl font-bold text-white">Intranet</h1>
@@ -39,14 +41,14 @@ const Login = () => {
         {/* Formulário */}
         <div className="p-8">
           {error && (
-            <div className="mb-4 p-3 bg-red-100 text-red-700 text-sm rounded border border-red-200">
+            <div className="mb-4 p-3 bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800 text-sm rounded border border-red-200">
               {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
                 Email Corporativo
               </label>
               <div className="relative">
@@ -57,7 +59,8 @@ const Login = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                  // Input adaptável
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500"
                   placeholder="seu.email@empresa.com.br"
                   required
                 />
@@ -65,7 +68,7 @@ const Login = () => {
             </div>
 
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
                 Senha
               </label>
               <div className="relative">
@@ -76,7 +79,8 @@ const Login = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                  // Input adaptável
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500"
                   placeholder="••••••••"
                   required
                 />
@@ -101,8 +105,8 @@ const Login = () => {
         </div>
 
         {/* Rodapé do Card */}
-        <div className="bg-gray-50 px-8 py-4 border-t border-gray-100 text-center">
-          <p className="text-xs text-gray-500">
+        <div className="bg-gray-50 dark:bg-gray-700/50 px-8 py-4 border-t border-gray-100 dark:border-gray-700 text-center transition-colors">
+          <p className="text-xs text-gray-500 dark:text-gray-400">
             Esqueceu sua senha? Contate o administrador.
           </p>
         </div>
