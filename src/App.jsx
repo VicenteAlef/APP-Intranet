@@ -12,6 +12,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Login from "./pages/Login";
 import Users from "./pages/Users";
 import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard";
 import MainLayout from "./layouts/MainLayout";
 
 // Componente PrivateRoute (Mantemos igual)
@@ -29,7 +30,7 @@ const PrivateRoute = ({ children }) => {
 };
 
 // Páginas Temporárias (para testar a navegação)
-const Dashboard = () => (
+const DashboardTest = () => (
   <h1 className="text-2xl font-bold text-gray-800">📊 Dashboard Geral</h1>
 );
 const UsersList = () => (

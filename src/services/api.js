@@ -3,7 +3,7 @@ import axios from "axios";
 // Cria uma instância do Axios
 const api = axios.create({
   // URL da sua API Node.js (ajuste a porta se necessário)
-  baseURL: "http://146.235.36.17:3000/api",
+  baseURL: "https://api-intranet.vicentedeveloper.com.br/api",
 });
 
 // Interceptor: Adiciona o Token JWT automaticamente em toda requisição
